@@ -1,4 +1,4 @@
-name: Spring Boot Tests
+name: Inventory Service Tests
 
 on: [push, pull_request]
 
@@ -41,7 +41,4 @@ jobs:
           ${{ runner.os }}-m2
 
     - name: Build with Maven
-      run: mvn -B clean verify
-
-    - name: Run tests
-      run: mvn test --file inventory-service/pom.xml
+      run: mvn -B clean verify --file inventory-service/pom.xml
