@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "inventory", url = "${inventory.url}")
+@FeignClient(value = "INVENTORY-SERVICE")
 public interface InventoryClient {
     @RequestMapping(method = RequestMethod.POST, value = "/api/v1/inventory")
     List<InventoryCheckResponse> isInStock(@RequestBody List<InventoryCheckRequest> requests);
