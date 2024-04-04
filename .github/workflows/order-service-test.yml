@@ -44,4 +44,4 @@ jobs:
       run: mvn -B clean verify
 
     - name: Run tests
-      run: mvn test
+      run: mvn test --file order-service/pom.xml
