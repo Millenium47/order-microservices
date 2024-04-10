@@ -29,7 +29,7 @@ public class JwtService {
                 .subject(username)
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plus(15, ChronoUnit.MINUTES)))
-                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET)), SignatureAlgorithm.HS256)
+                .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 

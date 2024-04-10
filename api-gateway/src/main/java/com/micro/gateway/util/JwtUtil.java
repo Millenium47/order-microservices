@@ -14,7 +14,7 @@ public class JwtUtil {
 
     public boolean isInvalid(final String token) {
         Jwts.parser().setSigningKey(Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET))).build().parseClaimsJws(token);
-        return true;
+        return false;
     }
 
 }

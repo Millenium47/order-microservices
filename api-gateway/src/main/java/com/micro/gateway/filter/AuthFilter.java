@@ -26,14 +26,11 @@ public class AuthFilter implements GatewayFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
-
         if (this.isAuthMissing(request)) {
             return this.onError(exchange, HttpStatus.UNAUTHORIZED);
         }
 
-        final String token = this.getAuthHeader(request);
-
-        if (jwtUtil.isInvalid(token)) {
+        if (jwtUtil.isInvalid(getToken(request))) {
             return this.onError(exchange, HttpStatus.FORBIDDEN);
         }
 
@@ -52,6 +49,11 @@ public class AuthFilter implements GatewayFilter {
 
     private boolean isAuthMissing(ServerHttpRequest request) {
         return !request.getHeaders().containsKey("Authorization");
+    }
+
+    private String getToken(ServerHttpRequest request) {
+        String token = this.getAuthHeader(request);
+        return token.startsWith("Bearer ") ? token.substring(7) : token;
     }
 
 }
